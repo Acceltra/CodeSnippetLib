@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 
 def show_image(image):
@@ -23,5 +24,13 @@ def make_kernel(width, height):
     return kernel
 
 
-def make_border_alg(image):
-    return image
+def func_time_wrapper(func):
+    def inner(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        end_time = time.time()
+        result = end_time - start_time
+        print('func time is %.3fs' % result)
+        return res
+
+    return inner
